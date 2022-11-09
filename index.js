@@ -11,39 +11,45 @@ const data = [
     name: "Abdi",
     email: "abdi@email.com",
     password: "P@ssw0rd",
-    is_active: true,
+    is_active: "true",
   },
   {
     id: 2,
     name: "raihan",
     email: "raihan@email.com",
     password: "P@ssw0rd",
-    is_active: true,
+    is_active: "true",
   },
   {
     id: 3,
     name: "Udin",
     email: "udin@email.com",
     password: "salah",
-    is_true: false,
+    is_active: "false",
   },
 ];
 
 // Function Get User By Name
 const getUserFilterHandler = (req, res) => {
-  const userNama = req.query.nama_user;
+  const name = req.query.name;
+  const is_active = req.query.is_active;
 
-  const filterUser = data.filter((datas) => datas.name == userNama);
-
-  if (filterUser.length === 0) {
-    res.status(404).send("User Not Found !");
-  } else {
-    if (filterUser[0].is_active === true) {
-      res.send(filterUser);
+  const filterData = data.filter((user) => {
+    if (name !== undefined && is_active !== undefined) {
+      if (is_active === "false") {
+        return res.json("User is not active");
+      } else {
+        return name === user.name && is_active === user.is_active;
+      }
+    } else if (name !== undefined) {
+      return name === user.name;
+    } else if (is_active !== undefined) {
+      return is_active === user.is_active;
     } else {
-      res.status(401).send("User Is Not Active");
+      return user;
     }
-  }
+  });
+  res.json(filterData);
 };
 
 // Function Create Data User
@@ -114,9 +120,6 @@ const deleteUserByidHandler = (req, res) => {
 };
 
 app.get("/user", getUserFilterHandler);
-app.get("/", (req, res) => {
-  res.send(data);
-});
 app.post("/user", createUserHandler);
 app.get("/user/:id", getUserByIdHandler);
 app.put("/user/:id", updateUserById);
