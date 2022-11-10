@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Abdi",
+    "email": "abdi@email.com",
+    "password": "P@ssw0rd",
+    "is_active": "true"
+  },
+  {
+    "id": 2,
+    "name": "raihan",
+    "email": "raihan@email.com",
+    "password": "P@ssw0rd",
+    "is_active": "true"
+  },
+  {
+    "id": 3,
+    "name": "Udin",
+    "email": "udin@email.com",
+    "password": "salah",
+    "is_active": "false"
+  }
+]
